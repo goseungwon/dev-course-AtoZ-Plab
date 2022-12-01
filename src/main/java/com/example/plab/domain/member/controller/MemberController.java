@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
@@ -33,6 +35,12 @@ public class MemberController {
     public CommonResponse<?> deleteMember(@PathVariable(name = "id") Long memberId) {
         memberService.deleteMember(memberId);
         return new CommonResponse<>("삭제 완료");
+    }
+
+    @GetMapping("/api/member")
+    public CommonResponse<?> showMembers() {
+        List<Member> members = memberService.getMembers();
+        return new CommonResponse<>(members);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
