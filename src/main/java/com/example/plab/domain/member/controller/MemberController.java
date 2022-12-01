@@ -41,7 +41,7 @@ public class MemberController {
     @PostMapping("/api/member/{memberId}/delete")
     public CommonResponse<?> deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
-        return new CommonResponse<>("삭제 완료");
+        return new CommonResponse<>("Member 삭제 완료.");
     }
 
     @GetMapping("/api/member")
