@@ -1,22 +1,26 @@
 package com.example.plab.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "match_list")
+@Getter
+@Table(name = "MATCH_LIST")
 public class MatchList {
 
     @Id
     @GeneratedValue
     private long sequence;
 
-    @Column(name = "member_id", nullable = false, unique = true)
-    private long memberId;
+    @JoinColumn(name = "member_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Member memberId;
 
-    @Column(name = "match_id", nullable = false, unique = true)
-    private long matchId;
+    @JoinColumn(name = "match_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Match matchId;
 
     @Column(name = "match_time", nullable = false)
     private LocalDateTime matchTime;
