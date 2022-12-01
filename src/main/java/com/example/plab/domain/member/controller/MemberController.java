@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,14 +26,20 @@ public class MemberController {
         return new CommonResponse<>(member);
     }
 
-    @PostMapping("/api/member/update")
-    public CommonResponse<?> updateMember(@RequestBody @Valid Member member) {
+    @GetMapping("/api/member/{memberId}")
+    public CommonResponse<?> getMemberInfo(@PathVariable Long memberId) {
+        Member member = memberService.getMemberById(memberId);
+        return new CommonResponse<>(member);
+    }
+
+    @PostMapping("/api/member/{memberId}/update")
+    public CommonResponse<?> updateMember(@PathVariable Long memberId, @RequestBody @Valid Member member) {
         Member updateMember = memberService.updateMember(member);
         return new CommonResponse<>(updateMember);
     }
 
-    @PostMapping("/api/member/{id}/delete")
-    public CommonResponse<?> deleteMember(@PathVariable(name = "id") Long memberId) {
+    @PostMapping("/api/member/{memberId}/delete")
+    public CommonResponse<?> deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
         return new CommonResponse<>("삭제 완료");
     }
@@ -46,6 +53,11 @@ public class MemberController {
     @ExceptionHandler(IllegalArgumentException.class)
     public CommonResponse<?> handleIllegalArgumentException(IllegalArgumentException exception) {
         return new CommonResponse<>(ResponseCode.EMAIL_ALREADY_USED);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public CommonResponse<?> handleNoSuchElementException(NoSuchElementException exception) {
+        return new CommonResponse<>(ResponseCode.NOT_FOUND_MEMBER);
     }
 
 

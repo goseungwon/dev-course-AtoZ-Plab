@@ -6,9 +6,10 @@ import com.example.plab.domain.member.repository.MemberRepository;
 import com.example.plab.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +40,10 @@ public class MemberService {
 
     public List<Member> getMembers() {
         return memberRepository.findAll();
+    }
+
+    public Member getMemberById(Long memberId) {
+        Optional<Member> member = memberRepository.findById(memberId);
+        return member.orElseThrow(() -> new NoSuchElementException("존재하지 않는 member 입니다."));
     }
 }
