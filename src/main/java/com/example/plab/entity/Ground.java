@@ -1,10 +1,14 @@
 package com.example.plab.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Table(name = "GROUND")
+@Builder
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Ground {
     @Id
     @GeneratedValue
