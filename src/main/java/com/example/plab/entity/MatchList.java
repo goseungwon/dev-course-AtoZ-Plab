@@ -1,13 +1,19 @@
 package com.example.plab.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Table(name = "MATCH_LIST")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class MatchList {
 
     @Id
@@ -21,7 +27,4 @@ public class MatchList {
     @JoinColumn(name = "match_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Match matchId;
-
-    @Column(name = "match_time", nullable = false)
-    private LocalDateTime matchTime;
 }
