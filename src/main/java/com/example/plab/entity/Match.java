@@ -1,8 +1,7 @@
 package com.example.plab.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
@@ -10,7 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "MATCH")
+@Table(name = "`MATCH`")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Match {
 
     @Id
@@ -23,7 +25,7 @@ public class Match {
 
     @JoinColumn(name = "ground_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Ground groundId;
+    private Ground ground;
 
     @Column(name = "max_people", nullable = false)
     private int maxPeople;
