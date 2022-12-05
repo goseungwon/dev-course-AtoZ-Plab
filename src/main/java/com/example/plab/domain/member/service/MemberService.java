@@ -28,7 +28,7 @@ public class MemberService {
     }
 
     public void deleteMember(Long memberId) {
-        memberRepository.removeMemberByMemberId(memberId);
+        memberRepository.deleteById(memberId);
     }
 
     public void isEmailUsed(String email) {

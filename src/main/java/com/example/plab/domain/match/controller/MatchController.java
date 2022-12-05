@@ -64,8 +64,8 @@ public class MatchController {
         return new CommonResponse<>(ResponseCode.NOT_FOUND_MATCH);
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public CommonResponse<?> handleRuntimeException(RuntimeException exception) {
-//        return new CommonResponse<>(ResponseCode.FULL_MATCH);
-//    }
+    @ExceptionHandler(RuntimeException.class)
+    public CommonResponse<?> handleRuntimeException(RuntimeException exception) {
+        return new CommonResponse<>(ResponseCode.FULL_MATCH);
+    }
 }
