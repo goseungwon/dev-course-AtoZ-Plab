@@ -1,5 +1,6 @@
 package com.example.plab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -25,6 +26,7 @@ public class Match {
 
     @JoinColumn(name = "ground_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Ground ground;
 
     @Column(name = "max_people", nullable = false)

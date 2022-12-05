@@ -67,6 +67,7 @@ public class MatchService {
         matchRepository.deleteById(matchId);
     }
 
+    @Transactional
     public void secessionMatch(long matchId, long memberId) {
         var match = getMatch(matchId);
         var member = memberService.getMemberById(memberId);
